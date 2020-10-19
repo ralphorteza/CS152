@@ -1,0 +1,107 @@
+Your task is to implement a recursive descent parser for a Made-Up Functional Language that we'll call MUFL 1.0.
+
+MUFL 1.0 will support the following grammar:
+
+<expr> -> OPENPAREN OPERATOR <operands> CLOSEPAREN |   NUMBER
+
+<operands> ->  <expr> [<operands>]
+
+The operators include +, -, *, and /  and numbers are stored as single precision floating point numbers (Float).
+
+A starter file, homework6.hsPreview the document is provided for your convenience and includes the relevant type definitions.
+
+The assignment includes 4 parts.
+Step 1
+
+Implement a scanner for the language by defining the function scan:
+
+scan :: String -> [Token]
+
+You may use any helper function you created in homework 5.
+
+Here are some test cases.  Please feel free to add your own.
+
+>scan "(+ 4 (* 3 5 2) 0.1 5.6 2.3)"
+
+[OpenParen,Operator '+',Number 4.0,OpenParen,Operator '*',Number 3.0,Number 5.0,Number 2.0,CloseParen,Number 0.1,Number 5.6,Number 2.3,CloseParen]
+
+> scan "(+ 3 a)"
+
+[OpenParen,Operator '+',Number 3.0*** Exception: Illegal Character: a
+
+HINT:  You may use the read function to convert the string representing the number to a float.
+Step 2
+
+Implement a recognizer for the language by defining the following functions :
+
+recognize :: [Token] -> Bool
+
+expr :: [Token] -> (Bool, [Token])
+
+operands :: [Token] -> (Bool, [Token])
+
+check:: String -> Bool
+
+check = recognize.scan
+
+Here are some test cases.  Please feel free to add your own.
+
+> check "(+ 4 (* 3 5 2) 0.1 5.6 2.3)"
+
+True
+
+> check "(+ 4 (*) 3 5 2 0.1 5.6 2.3)"
+
+*** Exception: unexpected )
+
+> check "(+ 4 (3 5 ))"
+
+*** Exception: Invalid expression
+Step 3
+
+Implement a parser for the language by defining the following functions :
+
+build :: [Token] -> ParseTree
+
+pexpr :: [Token] -> (ParseTree, [Token])
+
+poperands :: [Token] -> ([ParseTree], [Token])
+
+parse:: String -> ParseTree
+parse = build.scan
+
+Here is one test case.  Please feel free to add your own.
+
+parse "(+ 4 (* 3 5 2) 0.1 5.6 (- 5.3 1 2) (/ 10 2))"
+
+OpNode '+' [NumNode 4.0,OpNode '*' [NumNode 3.0,NumNode 5.0,NumNode 2.0],NumNode 0.1,NumNode 5.6,OpNode '-' [NumNode 5.3,NumNode 1.0,NumNode 2.0],OpNode '/' [NumNode 10.0,NumNode 2.0]]
+Step 4
+
+Implement an interpreter for the language by defining the following functions:
+
+eval :: ParseTree -> Float
+
+interpret :: String -> Float
+interpret = eval.build.scan
+
+Here are some test cases.  Please feel free to add your own.
+
+> interpret "(+ 4 (* 3 (- 5 2)) 0.1 5.6 (- 5.3 1 2) (/ 10 2))"
+
+26.0
+
+> interpret "(- 4)"
+
+-4.0
+
+> interpret "(/ 2)"
+
+0.5
+
+> interpret "(* 2)"
+
+2.0
+
+HINT:   Consider using map and one of the fold functions here.
+
+Start early, ask questions and have fun!

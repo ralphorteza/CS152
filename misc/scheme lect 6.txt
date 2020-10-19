@@ -1,0 +1,117 @@
+;;predicates are function that passes a boolean
+
+Programming Technique in Scheme
+--
+"cdr down and cons up:"
+
+apply the operation recursively to the tail of list (cdr down),
+then construct a new list with the current result (cons up)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Recursive func
+Base caseL prob size is as small as it can be
+- when dealing with number, its usually 0 or 1
+- for list, have a list '(): null
+
+
+Resursive rule: assume we know how to solve the "smaller problem" then solve the main
+
+for list: gotta use (car) (cdr)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ex.
+(define (factorial n)
+	(if (= 0 n)
+	    1
+	    (*n  (factorial (- n 1)))))
+
+
+ex.
+(member? 5 '(1 3 2 "hello)) -> #f
+
+base case: what's the smallest it can be?
+	   it'll be an empty list
+
+(define (member? x xs)
+	(if (null? xs) #f
+	    (if (equal? x (car xs)) #t	;; check if x is equal to the first item of xs
+		(member? x (cdr xs)))))
+
+;;better way
+(define (member? x xs)
+	(cond ((null? xs) #f)
+	      ((equal? x (car xs)) #t)
+	      (else (member? x (cdr xs))))))
+
+equal? function is used for generic type
+can use the equal sign, =, for numbers
+
+
+
+
+
+Append
+---
+when joining two lists the elements of list_1 is appended to list_2
+
+	(list_1)        (list_2)
+	'(1 2 3)	'(4 5 6)
+			(1 2 3 4 5 6)   ; This list is list_2
+
+
+- the basecase: problem size is as small as it can be? which determines our
+		problem size?	
+		the second list
+
+- Recursive Rule: how do we compute (our-append xs ys) assuming we know how to compute
+		(our-append (cdr xs) ys)
+		(cons (car xs)...
+
+;;Function our-append: list list -> list
+(define (our-apend xs ys)
+	(if (null? xs)
+		ys
+		(cons (car xs) (our apend (cdr xs) ys))))	
+
+
+
+(define (count xs ys)
+  (cond ((null? ys) 0)
+        ((equal? xs (car ys))(+ 1 (count xs (cdr ys)))) ; If xs == car ys, add 1 and recurse
+        (else (count xs (cdr ys)))))
+
+
+
+======examples
+;; Function sum-of-squares: list of numbers -> number
+;; Returns the sum of the squares of the elements in the list
+(sum-of-squares '(0 1 2 3)) ->14
+(sum-of-squares '() -> 0
+
+!!! answer
+;; Function sum-of-squares: list of number -> number
+;; Returns the sum of the squares of the elements in the list
+(define (sum-of-squares xs)
+  (if (null? xs)
+      0
+      (+ (* (car xs) (car xs)) (sum-of-squares (cdr xs)))))
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                         
+
+
+;; Predicate all-positive?: list of numbers -> bool
+;; returns #t if no element is less than 0 and #f otherwise
+(all-positive? '(0 1 2 3)) -> #t
+(all-positive? '(0 1 -2 3)) -> #f
+(all-positive? '()) - #t
+
+
+
+;; Function remove: element list -> list
+;; Removes all occurences of the element from the given list
+
+(remove 3' (1 2 3 4 5 4 3 2 1) -> (1 2 4 5 4 2 1)
+(remove 9' (1 2 3 4 5 4 3 2 1) -> (1 2 3 4 5 4 3 2 1)
+
+
+

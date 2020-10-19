@@ -1,0 +1,91 @@
+Funct in funt 
+--
+(define (sum-of-sq x y)
+	
+	(define (square a)	;; definse a square functionality within sum-of-sq
+		(* a a))	;; returns product of a and a
+	
+	(define (sum b c))	;;defines a sum funct within sum-of-sq
+		(+ b c)))
+
+	(sum (suare x) (square y))	;;results of combining two functs to produce one overall funct
+
+
+Using outer sym
+---
+(define (assert-equal a b)
+
+	(define (print-erroro)
+		(display a)
+		(display " is not equal to ")
+		(display b)
+		(newline))
+
+	(if (not (equal? a b)) (print-error) null))) ;;if results T, it returns null (no error)
+
+(assert-equal 3 (+ 1 2))
+=>
+(assert-equal 3( + 2 2))
+=> 3 is not equal to 4
+
+
+
+ex2
+(define (circle-details r)
+	(define pi 3.14)
+	(define (area ) (round (* pi r r)))	;;define the area funct
+	(define (circum) (round (* 2 pi r)))	;;define the circumference funct
+	(list (area) (circum)))			;;defines a list with area and circum funct
+
+(circle-details 3)
+=> (28.0 19.0)		;;resulst the list of the area	
+
+
+
+
+Returning funct
+--
+;; this is a functtion that returns a funct
+(define (make-add-one)
+	(dfine (inc x ) (+ 1 x))
+	inc))			
+
+
+(make-add-one)
+=> #<prodcedure: inc>
+
+(define myfn make-add-one)
+
+(myfn 2)
+=>procedure make-add-one: expects no args, given 1
+
+
+(define my fn (make-add-one))
+(my fn 2)
+->3
+
+
+
+
+**Closures
+--
+(define (make-add-x x)
+	(define (add-x y) (+ x y))
+	(add-x))
+
+
+ex
+(define add-3 (make-add-x 3))
+#<procedure:add-x>
+(add-3 4)		;;this implicitly adds 3 with 4
+ => 7			;; this is weird
+
+
+usage
+(define (make-counter)
+	(dfine value 0)]
+	(deinfe (counter)			;; defines value as 0, and defining counter  
+		(set! value (+ value 1))	;; and set value+1 
+		value)
+	counter)
+

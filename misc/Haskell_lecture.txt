@@ -1,0 +1,253 @@
+## Haskel 
+---
+
+##### Haskell v Java
+Dikjstra was not a fan of java, because of how he thinks of its inferior
+syntax
+
+##### Pattern Matching
+
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n -1)
+
+###### Pattern Matching with list
+
+> x.y.x = xs
+
+> x
+=> 1
+> y 
+=> 2
+>z
+=> 3,4
+
+####### ex
+> x.y.z = [1,2,3,4]
+>[x:_:z]
+
+what is in the middle?
+
+=> 2
+
+##### Pattern Matching with List and Funct
+**Task:** Write a funct second taht takes in a list an returns the second element of that list.
+
+
+second :: [a]-> a
+>econd [] 
+=> error "the list is too short"
+>second (_:[])
+=>"the list is too short" 
+second (_:x:_) = x
+
+
+**Task:** write a func swap that takes in a list of any type and reutnr another list with the first and second elements swapped.
+>swap:: [a]
+=> [a]
+
+>swap(only:[])
+=> [only]
+
+>swap(first:second:rest)
+=> second:first:rest
+
+
+>swap[1,2,3]
+=>[2,1,3]
+
+###### Strings are list of Characters
+this funct takses a list of any type a character
+
+>:"hello"
+=> "hello"=[Char]
+> :t swap
+swap :: [a]->[a]
+
+>second "hello"
+=> 'e'			<- use single quote for char, and double quote on str
+>swap "ello"
+=> "ehllo"
+
+**Task:** write a funct monthname that takes an integer representing a month number and returns the monthname
+monthname:: Int--> String
+monthname 1 = "January"
+monthname 2 = "February"
+monthname 3 = "March"
+monthname 4 = "April"
+monthname 5 = "May"
+monthname 6 = "June"
+monthname 7 = "July"
+monthname 8 = "August"
+monthname 9 = "September"
+monthname 10 = "October"
+monthname 11 = "November"
+monthname 12 = "December"
+monthname _ = "Invalid Month"     <- use this the exhaustive value
+
+>monthname 0
+=> "invalide month"
+>monthname 12
+=> "December"
+
+
+#### Guards
+---
+Guards allows us to def func based on conditions
+Syntax:
+```
+f parameters
+  | condition 1 = expression 1
+  | condition 2 = expression 2
+  | condition 3 = expression 3
+	...
+  | otherwise   = default
+```
+
+##### Case expression
+```
+case expression of pattern1 -> result1
+		   pattern2 -> result2
+		   pattern3 -> result3
+			...
+
+**Task:** write a funct takeonly that takes in an integer and a list oand return a list containing the first n elements of the input list.
+
+takeonly:: Integer-> [a] -> [a]
+takeonly n xs = case(n,xs) of
+(0,_) -> []
+(_,[]) -> []
+(n,xKsx) -> x:takeonly (n-1) xs
+
+
+**ex**
+>takeonly 3[2,3,4,5,6]
+=>[2,3,4]
+
+>takeonly 3 "Spartan
+=> "Spa"
+
+>takeonly 0 "Spartan"
+=> ""
+
+>takeonly 10 "Spartan"
+=> "Spartan"
+
+#### Binding with Where
+---
+Syntax
+	```
+	block
+	  where
+		var1=expression1
+		var2=expression2
+	```
+
+####ex
+volume::( Num a) => a-> a-> a-> a
+volume width length = area * height
+  where
+	area = width * length
+
+**Task:** Write a funct lowest that takes as its arg a list of elements that can be ordered. the funct returns the lowest elem in the list.
+```
+lowest:: (Ord a) => [a] -> a
+lowest[]= error "The list is empty"
+lowest[x]=x		-- this signifies that the list only has one element
+lowest(x:xs)
+  | x lowestRest = x
+  | otherwise = lowestRest
+   where
+	lowestRest = lowest xs
+```
+
+
+#### let... in... Expressions
+---
+let var1= expression1
+    var2= expression2
+	...
+in expression
+
+
+**ex**
+let result = 5 *3 in result 10 -- this is an expression, its value is 25
+
+**ex2**
+volume::(Num a)=> a -> a -> a ->
+volume width length height = let area = width * length
+in area * height
+
+**Task:** write a dunct, index, that takes an elem and a list as args. The func returns the index of the first occureence of the given elem in the list. If the leme is not in the list, the funct returns -1
+
+index:: Eqa =>a->[a]->Int
+index_[]=-1 		-- Base case, if nothing in the list return -1
+index y (x:xs)
+  |y==x=0
+  |otherwise= let indexRest= index y xs
+   in
+     case indexRest of
+	-1 -> -1
+	_ -> 1 + indexRest
+
+>index8[1,2,9,4]	-- returns -1 because 8 is not in the list
+=> `-1`
+
+>index9[1,2,9,4]	-- returns 2 as 9 is in index 2 (base 0)
+=> `2`
+>index1[1,2,9,4]
+=> `0`
+>index 'S' "Go Spartans!"
+=> `3`
+
+
+## TYPES
+---
+
+### Built-in Simple Types
+Char: 'A'
+Bool: True, False
+Int: Bounded integers
+Integer: Unbounded integers
+Float: floating point with single precision
+Double: floating point with double precision
+
+
+### More (Compiled Types)
+List: [some type]
+Functions: some type -> some other type
+...
+
+### Type Classes
+A type class is a fam of similiart types that provide implementations for some common functionlity
+
+>:type (+)
+(+) :: Num a => a-> a-> a
+
+a is a type variable
+NUm a is the context
+
+
+EqL types that support == and != (char,bool,Int,Integer,Float,Double,list,etc)
+Ord: ty[es tjat have an ordering. support equalitites
+Show: represent str
+Enum: enum types, can be used a a range
+Integral: Int and Integer
+Floating: Double and Float
+
+
+##### User Defined Types
+Syntax:
+	`data <typeName> = <constructor> ...<deriving>`
+
+ex:
+```
+data SJSUColor = Blue| Yellow 
+>color = Blue
+>:t color
+=>color :: SJSUColor
+color
+=> Error		-- caused an error b/c did not derived
+
+
+

@@ -1,0 +1,19 @@
+## Midterm 1 Review Items
+---
+
+#### Prepare by
+- Reviewing Lectures
+- Review iClicker quizzes
+- Homework assignments
+- Cheat sheet
+
+
+##### Sample Scheme Questions
+--- 
+- "What does the following expressions evaluate to?"
+- "Write a Scheme function that... "
+- "Is this Scheme function tail recursive?"
+- "What is the space complexity of this Scheme function?"
+- "Turn a Scheme function into a tail recursive function."
+- "Turn a Scheme function into a function that runs  in constant space."
+

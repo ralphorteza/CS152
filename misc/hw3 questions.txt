@@ -1,0 +1,151 @@
+Your task is to define the Scheme functions below.
+
+Please submit all function definitions in a single file (hw3.rkt) with your team name included in the top level comment.
+
+Make sure you include comments for each function, documenting its name, its parameter(s) and return value and their expected types.
+
+To get any credit on the assignment, your code must run in R5RS.
+
+1)   Write a Scheme function all-but-last that takes in a list as its argument and returns the list without the last element. 
+    You may assume that the list has at least one element. Here are some test cases:
+
+    (all-but-last '(hello)) -> ()
+    (all-but-last '(go spartans)) -> (go)
+    (all-but-last '(i was just guessing at numbers and figures pulling the puzzles apart))  -> (i was just guessing at numbers and figures pulling the puzzles)
+
+2)   Write a Scheme predicate common? that takes in two lists as its arguments and returns #t if the lists have at least one element in common and #f otherwise.
+    Hint: you may include and use the member?  predicate defined in the lecture.
+
+    (common? '(go spartans) '(1 2 3)) -> #f
+    (common? '(they had to go) '(go spartans) ) -> #t
+    (common? '(0 0 0 5 9) '(a  b 3 4 5 6) ) -> #t
+    (common? '(1 2 3) '()) -> #f
+    (common? '() '(1 2 3)) -> #f
+    (common? '() '()) -> #f
+
+3)  Write a Scheme function make-list that takes in three integers as its arguments (start, stop and step). The  function returns a list of integers from start to stop (including start but not including  stop) separated by step.  You may assume that step is positive (> 0).
+    Here are some examples:
+
+    (make-list  2 10 2) -> (2 4 6 8)
+    (make-list -3 10 3) -> (-3 0 3 6 9)
+    (make-list 5 5 3) -> ()
+    (make-list 5 1 2) -> ()			(I have the high ground)
+
+4)  Write a Scheme function mix that takes two lists, and returns a new list formed by alternating the elements of both lists. If one of the lists is longer than the other, the extra elements of the longer list are included at the end of the new list.  \
+    Here are some examples:
+    (mix '(1 2 3) '(a b c d e))  ->  '(1 a 2 b 3 c d e)
+
+    (mix '(1 2 3 4 5) '(a b))  ->  '(1 a 2 b  3 4 5)
+
+    (mix '(1 2 3) '(a b c)) -> '(1 a 2 b 3 c)
+
+
+5)  Write a Scheme function take-while that takes a predicate (a function) and a list  as arguments.  The function returns a new list that contains the first few elements of the input list that meet the criteria specified by the predicate.  The first element that does not meet the criteria and all subsequent elements are excluded.   Here are some examples:
+
+    (take-while (lambda (x) ( > x 3 )) '(9 4 2 3 7 8 6)) -> (9 4)
+    (take-while (lambda (x) ( > x 5 )) '(4 2 3 7 8 6)) -> ()
+    (take-while (lambda (x) ( = x 5 )) '()) -> ()
+    
+
+6)  Write a Scheme predicate at-least-two? that takes a list  of numbers as its argument  The function returns #t if the numbers are in order with a difference of at least two between two consecutive numbers.  Here are some examples:
+
+    (at-least-two? '(2 5 7 20)) -> #t
+    (at-least-two? '(5 2 7 20))  -> #f
+    (at-least-two? '(2 5 6 20)) -> #f
+    (at-least-two? '()) -> #t
+    (at-least-two? '(4)) -> #t
+
+
+7) 
+     Here are some examples:
+     (lowest '(4 1 -9 2 10 -3)) -> -9
+     (lowest '(100)) -> 100
+
+
+      For full credit, your implementation must be efficient with no repeated recursive calls.
+
+Rubric
+Homework 3 Grading Rubric
+Homework 3 Grading Rubric
+Criteria 	Ratings 	Pts
+This criterion is linked to a Learning Outcome all-but-last
+	
+2.0 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+2.0 pts
+This criterion is linked to a Learning Outcome common?
+	
+2.0 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+2.0 pts
+This criterion is linked to a Learning Outcome make-list
+	
+2.0 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+2.0 pts
+This criterion is linked to a Learning Outcome mix
+	
+2.0 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+2.0 pts
+This criterion is linked to a Learning Outcome take-while
+	
+2.0 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+2.0 pts
+This criterion is linked to a Learning Outcome at-least-two?
+	
+2.0 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+2.0 pts
+This criterion is linked to a Learning Outcome lowest: correctness
+	
+1.5 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+1.5 pts
+This criterion is linked to a Learning Outcome lowest: efficiency
+	
+1.5 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+1.5 pts
+This criterion is linked to a Learning Outcome Comments
+	
+1.0 pts
+Full Marks
+	
+0.0 pts
+No Marks
+	
+1.0 pts

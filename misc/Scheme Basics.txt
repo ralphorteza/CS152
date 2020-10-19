@@ -1,0 +1,124 @@
+
+
+Pairs
+(cons 1 2)		;; makes a pair via predicate 'cons'
+  => (1 . 2)
+
+(cons (cons 1 2) 3)
+    => ((1 . 2 ) . 3)
+
+
+ definition
+(def foo (cons 1 2))
+foo
+	=> (1 . 2)
+
+(car foo)
+ => (1 . 2)
+
+(cdr foo)
+=> (2)
+
+
+
+
+**LIST**
+--
+
+(cons 1 null)   ;; this is a list of 1 item
+(define bar (cons 1 null)))
+
+bar
+	=> 
+	(1)
+
+(car bar)
+	=> 1
+cdr bar )
+	=> () 
+null
+	=> ()
+
+
+
+(cons 1 (cons 2 null))
+	=> (1 2)				;; manually made a list cascading down
+
+(cons1 (cons 2 (cons 3 null)))
+=> (1 2 3)
+
+
+car and cdr*
+(cadr mylist) 	; takes the second car of the list 
+
+
+(caddr mylist)
+ => 3
+
+
+(equal? (list 1 2 3)
+=> #t			;; will return a bool funct 
+
+
+
+(list-ref (list ("a" "b" "c") l)
+=>"b"				; calls the element 1 in the list ref
+
+
+how to implement list-ref?
+---
+
+(define (my-list-ref lst n)
+	(if (zero? n)
+	    (car lst)		;; this returns the second item on list
+	    (my-list-ref (cdr lst) (- n 1))))
+
+(my-list-ref (list ("a" "b" "c") 1)
+ => "b"
+
+
+
+MAP
+---
+
+(define baz (list 1 2 3))
+
+(define (double x) (* x 2)) ;;applies a multplication of 2 with a list value  and output prod
+
+(map double baz)	
+	=> (2 4 6)		
+
+
+How to implement map?
+(define (my-map fn lst)
+	(if (null? lst)		;;base case= returns null otherwise recursive call to funct
+		null
+		(cons (fn (car lst)) (my-map fn (cdr lst))))))
+
+(my-map double baz) 	;; double is a function to mult with 2
+
+
+
+**Fold
+(define qux (list 1 2 3 4))
+>(foldr + 0 qux)
+	=> 10		;; this "folds onto each item to eachother and adding all together
+
+How to implement a folder?
+(define (my-foldr fn start lst)
+	(if (null? lst)
+		start
+		(fn (car lst) (my-foldr fn start (cdr lst))))))
+
+(my-foldr + 0 qux)
+=> 10
+(my-foldr *1 qux)
+=> 24
+
+
+note: mzscheme its null, but its really nil **
+
+
+
+documenting
+;; document two lines before the defining
